@@ -38,3 +38,6 @@ class Trainer(object):
             d_loss_fake = self.calc_loss(d_out_fake, False)
 
             d_loss = d_loss_real + d_loss_fake
+            self.reset_grad()
+            d_loss.backward()
+            self.d_optimizer.step()
