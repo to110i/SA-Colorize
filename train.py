@@ -31,7 +31,6 @@ class Trainer(object):
 
             try:
                 real_img = next(data_iter)
-
             except:
                 data_iter = iter(self.dataloader)
                 real_img = next(data_iter)
@@ -55,6 +54,7 @@ class Trainer(object):
             if self.adv_loss == 'wgan-gp':
                 alpha = torch.rand(real_ab.size(
                     0), 1, 1, 1).cuda().expand_as(real_Lab)
+                fake_Lab = torch.cat([real_L, real_ab], 1)
                 interpolated = torch.autograd.Variable(
                     alpha * real_Lab.data + (1 - alpha) * fake_Lab.data, requires_grad=True)
                 out, _, _ = self.D(interpolated)
