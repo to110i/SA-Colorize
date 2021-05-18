@@ -20,6 +20,7 @@ class Trainer(object):
         if self.adv_loss == 'hinge':
             loss = torch.nn.ReLU()(1.0 + x).mean()
             # ここ1.0で大丈夫...？
+        return loss
 
     def train(self) -> None:
         data_iter = iter(self.dataloader)
